@@ -1,14 +1,12 @@
 name: Deploy to GitHub Pages
 
-on: 
+on:
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
   build:
@@ -28,20 +26,11 @@ jobs:
       - name: Build Astro site
         run: bun run build
 
-      - name: Deploy to web branch
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.SECRET_TOKEN }}
-          publish_dir: ./dist
+          personal_token: ${{ secrets.GH_PAT }}
+          external_repository: Hasban-Fardani/hasbanfardani.github.io
           publish_branch: web
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          publish_dir: ./dist
+          cname: hasbanfardani.my.id
