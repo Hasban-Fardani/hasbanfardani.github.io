@@ -1,4 +1,4 @@
-name: Deploy to github pages
+name: Deploy to GitHub Pages
 
 on: 
   push:
@@ -16,18 +16,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: '22'
-      
+          bun-version: '1.2.12'
+
       - name: Install dependencies
-        run: npm ci
-      
+        run: bun install
+
       - name: Build Astro site
-        run: npm run build
-      
+        run: bun run build
+
       - name: Deploy to web branch
         uses: peaceiris/actions-gh-pages@v4
         with:
