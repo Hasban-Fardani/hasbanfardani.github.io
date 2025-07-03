@@ -29,7 +29,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.GH_PAT }}
+          personal_token: ${{ secrets.SECRET_TOKEN }}
           external_repository: Hasban-Fardani/hasbanfardani.github.io
           publish_branch: web
           publish_dir: ./dist
